@@ -8,48 +8,47 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <header>
-    <div class="container nav" role="navigation" aria-label="principal">
-      <a class="brand" href="#/home" aria-label="Página inicial"><span>&lt;/&gt;</span> Izaac</a>
-      <nav class="nav-links" aria-label="seções">
-        <a class="nav-link" href="#/home">Início</a>
-        <a class="nav-link" href="#/sobre">Sobre</a>
-        <a class="nav-link" href="#/projetos">Projetos</a>
-        <a class="nav-link" href="#/blog">Blog</a>
-        <a class="nav-link" href="#/contato">Contato</a>
-      </nav>
-      <div class="actions">
-        <button class="btn sm ghost" id="themeBtn" aria-pressed="false" aria-label="Alterar tema">Tema</button>
-        <a class="btn sm primary" href="#/contato">Contratar</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container" id="app" tabindex="-1">
-    <!-- Início -->
-      <div class="hero">
-        <div>
-          <h1 id="home-title">Crio experiências digitais elegantes e eficientes</h1>
-          <p class="lead">Portfólio monocromático, totalmente responsivo, com interações, animações suaves e foco em performance.</p>
-          <div class="flex gap-12 mt-16">
-            <a class="btn primary" href="#/projetos">Ver projetos</a>
-            <a class="btn ghost" href="#/sobre">Conheça-me</a>
-          </div>
-          <div class="stat-row mt-24" aria-label="métricas">
-            <div class="stat"><div class="kpi">+30</div><div>Projetos</div></div>
-            <div class="stat"><div class="kpi">5 anos</div><div>Experiência</div></div>
-            <div class="stat"><div class="kpi">~95</div><div>Lighthouse</div></div>
+    <header>
+        <div class="container nav" role="navigation" aria-label="principal">
+          <a class="brand" href="#home" aria-label="Página inicial"><span>&lt;/&gt;</span> Izaac</a>
+          <nav class="nav-links" aria-label="seções">
+            <a class="nav-link" href="#home">Home</a>
+            <a class="nav-link" href="#sobre">Sobre</a>
+            <a class="nav-link" href="#projetos">Projetos</a>
+            <a class="nav-link" href="#blog">Blog</a>
+            <a class="nav-link" href="#contato">Contato</a>
+          </nav>
+          <div class="actions">
+            <button class="btn ghost" id="themeBtn" aria-pressed="false" aria-label="Alterar tema">Tema</button>
+            <a class="btn primary" href="#contato">Contratar</a>
           </div>
         </div>
-        <div class="panel">
-          <div class="panel-body">
+    </header>
+    
+    <main class="container" id="app" tabindex="-1">
+        <!-- Início -->
+        <div class="hero" id="home">
+          <div>
+            <h1>Crio experiências digitais elegantes e eficientes</h1>
+            <p class="lead">Portfólio monocromático, totalmente responsivo, com interações, animações suaves e foco em performance.</p>
+            <div class="flex gap-12 mt-16">
+              <a class="btn primary" href="#projetos">Ver projetos</a>
+              <a class="btn ghost" href="#sobre">Conheça-me</a>
+            </div>
+            <div class="stat-row mt-24" aria-label="métricas">
+              <div class="stat"><div class="kpi">+30</div><div>Projetos</div></div>
+              <div class="stat"><div class="kpi">5 anos</div><div>Experiência</div></div>
+              <div class="stat"><div class="kpi">~95</div><div>Lighthouse</div></div>
+            </div>
+          </div>
+          <div class="panel">
             <div class="carousel" id="home-carousel" aria-roledescription="carrossel" aria-label="Destaques">
               <button class="arrow left" aria-label="Anterior" data-dir="-1">◀</button>
               <button class="arrow right" aria-label="Próximo" data-dir="1">▶</button>
               <div class="carousel-track">
-                <div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">Landing Page</div>
-                <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">Dashboard</div>
-                <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">E-commerce</div>
+                <div class="slide" role="group" aria-label="1 de 3">Landing Page</div>
+                <div class="slide" role="group" aria-label="2 de 3">Dashboard</div>
+                <div class="slide" role="group" aria-label="3 de 3">E-commerce</div>
               </div>
               <div class="controls" role="tablist" aria-label="Indicadores">
                 <button class="dot" aria-label="Ir para slide 1" aria-selected="true"></button>
@@ -59,21 +58,37 @@
             </div>
           </div>
         </div>
-      </div>
-  </main>
-
-  <footer>
-    <div class="container" style="display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap">
-      <div>&copy; <span id="year"></span> Izaac. Todos os direitos reservados.</div>
-      <div class="flex gap-12">
-        <a class="badge" href="#/home">Início</a>
-        <a class="badge" href="#/sobre">Sobre</a>
-        <a class="badge" href="#/projetos">Projetos</a>
-        <a class="badge" href="#/blog">Blog</a>
-        <a class="badge" href="#/contato">Contato</a>
-      </div>
-    </div>
-  </footer>
+    </main>
+    
+    <footer>
+        <div class="container footer-grid">
+          <div class="footer-section">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#home">Início</a></li>
+              <li><a href="#sobre">Sobre</a></li>
+              <li><a href="#projetos">Projetos</a></li>
+              <li><a href="#blog">Blog</a></li>
+              <li><a href="#contato">Contato</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="mailto:izaac@email.com">izaac@email.com</a></li>
+              <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+              <li><a href="https://github.com" target="_blank">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Sobre mim</h4>
+            <p>Sou desenvolvedor focado em experiências digitais eficientes, interativas e acessíveis. Este portfólio é 100% monocromático e responsivo.</p>
+          </div>
+        </div>
+        <div class="container footer-bottom">
+          &copy; <span id="year"></span> Izaac. Todos os direitos reservados.
+        </div>
+    </footer>
   <script src="/js/script.js"></script>
 </body>
 </html>
