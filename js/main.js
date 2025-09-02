@@ -56,18 +56,4 @@
     });
   
   })();
-  document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".buttons button");
   
-    buttons.forEach((btn) => {
-      const classes = btn.classList;
-  
-      if (classes.contains("default")) btn.textContent = "Default";
-      if (classes.contains("primary")) btn.textContent = "Primary";
-      if (classes.contains("secondary")) btn.textContent = "Secondary";
-      if (classes.contains("ghost")) btn.textContent = "Ghost";
-      if (classes.contains("danger")) btn.textContent = "Danger";
-      if (classes.contains("success")) btn.textContent = "Success";
-    });
-  });
-    
