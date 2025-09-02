@@ -55,4 +55,9 @@
     });
   
   })();
+  window.addEventListener('scroll', () => {
+    const texto = document.getElementById('texto');
+    texto.classList.add('laser-active');
+    setTimeout(() => texto.classList.remove('laser-active'), 300);
+  });
   
