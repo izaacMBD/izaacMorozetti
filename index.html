@@ -2,57 +2,101 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfólio – Izaac</title>
-  <meta name="description" content="Portfólio monocromático, responsivo e interativo em um único arquivo HTML/JS." />
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Max Böck — clone</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
-    <header>
-        <div class="container nav" role="navigation" aria-label="principal">
-          <a class="brand" href="index.html" aria-label="Página inicial"><span>&lt;/&gt;</span> Izaac</a>
-          <nav class="nav-links" aria-label="seções">
-            <a class="nav-link" href="index.html">Home</a>
-            <a class="nav-link" href="about.html">Sobre</a>
-            <a class="nav-link" href="projects.html">Projetos</a>
-            <a class="nav-link" href="blog.html">Blog</a>
-            <a class="nav-link" href="contact.html">Contato</a>
-          </nav>
-          <div class="actions">
-            <button class="btn ghost" id="themeBtn" aria-pressed="false" aria-label="Alterar tema">Tema</button>
-          </div>
-        </div>
-    </header>
-    
-    <footer>
-        <div class="container footer-grid">
-          <div class="footer-section">
-            <h4>Navegação</h4>
-            <ul>
-              <li><a href="index.html">Início</a></li>
-              <li><a href="about.html">Sobre</a></li>
-              <li><a href="projects.html">Projetos</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="contact.html">Contato</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Contato</h4>
-            <ul>
-              <li><a href="mailto:izaac@email.com">izaac@email.com</a></li>
-              <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-              <li><a href="https://github.com" target="_blank">GitHub</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Sobre mim</h4>
-            <p>Sou desenvolvedor focado em experiências digitais eficientes, interativas e acessíveis. Este portfólio é 100% monocromático e responsivo.</p>
-          </div>
-        </div>
-        <div class="container footer-bottom">
-          &copy; <span id="year"></span> Izaac. Todos os direitos reservados.
-        </div>
-    </footer>
-  <script src="js/script.js"></script>
+<body class="theme-classic">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#">Max Böck</a>
+
+      <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-label="Abrir menu">
+        ☰
+      </button>
+
+      <nav class="site-nav" id="siteNav" aria-hidden="true">
+        <ul>
+          <li><a href="#">01 Home</a></li>
+          <li><a href="#">02 Writing</a></li>
+          <li><a href="#">03 Notes</a></li>
+          <li><a href="#">04 About</a></li>
+        </ul>
+      </nav>
+
+      <div class="controls">
+        <button id="themeToggle" class="theme-btn" aria-expanded="false" aria-label="Abrir seletor de temas">
+          Select Theme ▾
+        </button>
+      </div>
+    </div>
+
+    <div class="theme-panel" id="themePanel" aria-hidden="true">
+      <h4>Choose theme</h4>
+      <ul class="theme-list" id="themeList">
+        <li><button data-theme="theme-classic">Classic</button></li>
+        <li><button data-theme="theme-dark">Dark</button></li>
+        <li><button data-theme="theme-koopa">Koopa Beach</button></li>
+        <li><button data-theme="theme-choco">Choco Mountain</button></li>
+        <li><button data-theme="theme-rainbow">Rainbow Road</button></li>
+        <li><button data-theme="theme-hacker">Hacker News</button></li>
+      </ul>
+      <button id="closeTheme" class="close-theme">Fechar</button>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero">
+      <p class="eyebrow">#</p>
+      <h1>I make websites.</h1>
+      <p class="intro">
+        Hello, my name is <strong>Max</strong>. I’m a front-end developer and co-founder of
+        <a href="https://www.codista.com" target="_blank" rel="noopener">Codista</a>.
+      </p>
+    </section>
+
+    <section class="featured">
+      <h2>Featured Posts</h2>
+      <div class="posts-grid">
+        <article class="post">
+          <img src="images/placeholder.jpg" alt="" />
+          <h3><a href="#">Going Buildless</a></h3>
+          <p class="meta">Can we do modern web development without a build step? 60</p>
+        </article>
+
+        <article class="post">
+          <img src="images/placeholder.jpg" alt="" />
+          <h3><a href="#">Old Dogs, new CSS Tricks</a></h3>
+          <p class="meta">A lot of new CSS features... 47</p>
+        </article>
+
+        <article class="post">
+          <img src="images/placeholder.jpg" alt="" />
+          <h3><a href="#">The IndieWeb for Everyone</a></h3>
+          <p class="meta">Many people are looking for alternatives... 110</p>
+
+        </article>
+
+        <article class="post">
+          <img src="images/placeholder.jpg" alt="" />
+          <h3><a href="#">Media Queries in Times of @container</a></h3>
+          <p class="meta">With container queries on the horizon... 225</p>
+        </article>
+      </div>
+
+      <p class="see-all"><a href="#">See All Posts</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2012–2025 Max Böck</p>
+      <p class="links">
+        <a href="#">Work</a> · <a href="#">Social</a> · <a href="#">Legal</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
