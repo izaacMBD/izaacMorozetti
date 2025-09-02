@@ -299,7 +299,7 @@
     color: var(--accent);
     text-shadow:
       0 0 5px var(--accent),
-      0 0 10px var(--accent),
-      0 0 20px var(--accent),
-      0 0 40px var(--accent);
+      0 0 5px var(--accent),
+      0 0 5px var(--accent),
+      0 0 5px var(--accent);
   }
