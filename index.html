@@ -2,515 +2,271 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfólio – Izaac</title>
-  <meta name="description" content="Portfólio monocromático, responsivo e interativo em um único arquivo HTML/JS." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfólio — Desenvolvimento Web / Mobile</title>
+  <!-- Font personalizada (troque facilmente) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      /* Paleta monocromática: ajuste o --hue para variar o tom */
-      --hue: 220; /* azul acinzentado */
-      --bg: hsl(var(--hue), 8%, 6%);
-      --surface: hsl(var(--hue), 10%, 12%);
-      --muted: hsl(var(--hue), 8%, 26%);
-      --text: hsl(var(--hue), 20%, 92%);
-      --text-dim: hsl(var(--hue), 10%, 70%);
-      --primary: hsl(var(--hue), 70%, 48%);
-      --primary-600: hsl(var(--hue), 70%, 42%);
-      --primary-700: hsl(var(--hue), 70%, 36%);
-      --ring: hsl(var(--hue), 80%, 60%);
-      --ok: hsl(150, 35%, 45%);
-      --warn: hsl(40, 60%, 50%);
-      --danger: hsl(0, 60%, 55%);
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    :root{
+      --bg:#ffffff;
+      --fg:#0a0a0a;
+      --muted:#6b6b6b;
+      --accent:#000000;
+      --radius:14px;
+      --maxw:1100px;
+      --gap:20px;
+      --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 70% -10%, hsl(var(--hue), 20%, 14%), var(--bg));
-      color: var(--text); line-height: 1.5;
+    /* Reset minimal */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;padding:32px; 
+      background:var(--bg);color:var(--fg);font-family:var(--font);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      display:flex;justify-content:center;
     }
-    a { color: var(--text); text-decoration: none; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-    /* Header/Nav */
-    header {
-      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px);
-      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.1));
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .nav {
-      display: flex; align-items: center; gap: 16px; justify-content: space-between;
-    }
-    .brand { font-weight: 700; letter-spacing: .3px; }
-    .brand span { color: var(--primary); }
-    .nav-links { display: flex; gap: 8px; align-items: center; }
-    .nav a.nav-link { padding: 10px 12px; border-radius: 12px; opacity: .9; display: inline-flex; align-items: center; gap: 8px; }
-    .nav a.nav-link.active, .nav a.nav-link:hover { background: var(--surface); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); opacity: 1; }
-    .nav .actions { display: flex; gap: 8px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, var(--surface), hsl(var(--hue), 10%, 10%));
-      color: var(--text); cursor: pointer; transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
-    }
-    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
-    .btn.primary { background: linear-gradient(180deg, var(--primary), var(--primary-700)); border: 1px solid rgba(255,255,255,.12); }
-    .btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,.15); }
-    .btn.sm { padding: 8px 12px; font-size: .95rem; }
-    .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+    .wrap{width:100%;max-width:var(--maxw)}
 
-    /* Layout sections */
-    main { min-height: 80vh; }
-    section.view { display: none; animation: fade .3s ease; }
-    section.view.active { display: block; }
-    @keyframes fade { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0; } }
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .brand{display:flex;gap:16px;align-items:center}
+    .logo{width:72px;height:72px;border-radius:12px;border:2px solid var(--fg);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .title{line-height:1}
+    .title h1{margin:0;font-size:20px;letter-spacing:0.6px}
+    .title p{margin:0;color:var(--muted);font-size:13px}
 
-    /* Hero */
-    .hero {
-      display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: center; padding-top: 28px;
-    }
-    .hero h1 { font-size: clamp(28px, 5vw, 52px); line-height: 1.05; margin: 0 0 8px; }
-    .hero p.lead { color: var(--text-dim); font-size: clamp(16px, 2.1vw, 20px); margin: 0 0 18px; }
-    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; }
-    .stat { background: var(--surface); border-radius: var(--radius); padding: 14px 16px; min-width: 120px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
-    .stat .kpi { font-size: 22px; font-weight: 700; }
-    .panel {
-      border-radius: var(--radius); background: linear-gradient(180deg, hsl(var(--hue), 12%, 14%), hsl(var(--hue), 10%, 10%));
-      box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.06);
-      overflow: hidden;
-    }
-    .panel .panel-body { padding: 16px; }
+    /* Main grid */
+    main{display:grid;grid-template-columns:1fr 380px;gap:var(--gap)}
+    @media (max-width:900px){main{grid-template-columns:1fr} .sidebar{order:2}}
+
+    /* Hero / intro */
+    .hero{padding:22px;border-radius:12px;border:1px solid #e9e9e9}
+    .hero h2{margin:0 0 8px 0}
+    .hero p{margin:0;color:var(--muted)}
 
     /* Carousel */
-    .carousel { position: relative; overflow: hidden; border-radius: var(--radius); }
-    .carousel-track { display: flex; transition: transform .5s ease; }
-    .slide { min-width: 100%; height: 280px; background: var(--muted); display: grid; place-items: center; font-size: 24px; font-weight: 700; color: var(--text); }
-    .carousel .controls { position: absolute; inset: auto 0 12px; display: flex; justify-content: center; gap: 8px; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.35); border: 1px solid rgba(255,255,255,.5); cursor: pointer; }
-    .dot.active { background: var(--primary); border-color: var(--primary-600); }
-    .arrow { position: absolute; top: 50%; translate: 0 -50%; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15); padding: 8px; border-radius: 999px; cursor: pointer; }
-    .arrow.left { left: 10px; } .arrow.right { right: 10px; }
+    .carousel{position:relative;margin-top:18px}
+    .slides{display:flex;overflow:hidden;border-radius:12px;border:1px solid #eee}
+    .slide{min-width:100%;padding:24px;flex-shrink:0}
+    .slide h3{margin:0 0 6px}
+    .controls{position:absolute;right:12px;top:12px;display:flex;gap:8px}
+    .ctrl{border:1px solid #ddd;padding:6px 10px;border-radius:8px;background:transparent;cursor:pointer}
 
-    /* Cards grid */
-    .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
-    .col-12 { grid-column: span 12; }
-    .col-6 { grid-column: span 6; }
-    .col-4 { grid-column: span 4; }
-    .col-3 { grid-column: span 3; }
-    @media (max-width: 900px) { .col-6 { grid-column: span 12; } .col-4 { grid-column: span 12; } .hero { grid-template-columns: 1fr; } }
-    @media (max-width: 600px) { .col-3 { grid-column: span 12; } }
+    /* Projects grid */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+    @media (max-width:700px){.projects{grid-template-columns:1fr}}
 
-    .card { position: relative; border-radius: var(--radius); background: linear-gradient(180deg, hsl(var(--hue), 12%, 14%), hsl(var(--hue), 10%, 9%)); border: 1px solid rgba(255,255,255,.06); overflow: hidden; transition: transform .15s ease, box-shadow .2s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-    .card .cover { height: 160px; background: linear-gradient(45deg, var(--muted), hsl(var(--hue), 8%, 20%)); display: grid; place-items: center; font-weight: 700; }
-    .card .body { padding: 14px 16px 18px; }
-    .badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); }
+    .card{border-radius:12px;border:1px solid #efefef;padding:16px;min-height:140px;display:flex;flex-direction:column;justify-content:space-between}
+    .card h4{margin:0 0 8px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid #ddd}
 
-    /* Tabs (subseções) */
-    .tabs { display: flex; gap: 8px; background: rgba(255,255,255,.03); padding: 8px; border-radius: 12px; border: 1px solid rgba(255,255,255,.06); }
-    .tab-btn { padding: 10px 12px; border-radius: 10px; background: transparent; color: var(--text); border: 1px solid transparent; cursor: pointer; }
-    .tab-btn.active, .tab-btn:hover { background: var(--surface); border-color: rgba(255,255,255,.1); }
+    /* Scroll cards area (custom scroll) */
+    .scroller{overflow:auto;display:flex;gap:12px;padding:12px 6px;scroll-snap-type:x mandatory}
+    .scroller .small{min-width:220px;scroll-snap-align:center;border-radius:8px;border:1px solid #efefef;padding:12px}
+    /* custom scrollbar */
+    .scroller::-webkit-scrollbar{height:10px}
+    .scroller::-webkit-scrollbar-thumb{background:linear-gradient(#000,#444);border-radius:999px}
 
-    /* Accordion */
-    .accordion { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); }
-    .acc-item + .acc-item { border-top: 1px solid rgba(255,255,255,.06); }
-    .acc-head { padding: 14px 16px; cursor: pointer; background: var(--surface); display: flex; justify-content: space-between; align-items: center; }
-    .acc-body { padding: 0 16px 16px; display: none; color: var(--text-dim); }
-    .acc-item.open .acc-body { display: block; }
+    /* Sidebar */
+    .sidebar{position:sticky;top:24px;padding:18px;border-radius:12px;border:1px solid #f0f0f0;height:fit-content}
+    .sidebar h3{margin-top:0}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--fg);text-decoration:none;font-weight:600}
 
     /* Footer */
-    footer { border-top: 1px solid rgba(255,255,255,.06); color: var(--text-dim); padding: 22px 0 40px; }
+    footer{margin-top:22px;color:var(--muted);font-size:13px}
 
-    /* Utilities */
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    .mt-16{ margin-top: 16px; } .mt-24{ margin-top: 24px; } .mt-32{ margin-top: 32px; }
-    .flex { display: flex; } .gap-8{ gap: 8px; } .gap-12{ gap: 12px; } .gap-16{ gap: 16px; }
+    /* Small utilities */
+    .meta{color:var(--muted);font-size:13px}
+    .kbd{border:1px solid #ddd;padding:4px 6px;border-radius:6px;font-family:monospace;font-size:12px}
 
-    /* Toast */
-    .toast { position: fixed; right: 16px; bottom: 16px; background: var(--surface); border: 1px solid rgba(255,255,255,.08); padding: 12px 14px; border-radius: 12px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transform: translateY(6px); transition: all .25s ease; }
-    .toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    /* Accessibility focus */
+    a:focus,button:focus{outline:3px solid rgba(0,0,0,0.06);outline-offset:3px}
+
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav" role="navigation" aria-label="principal">
-      <a class="brand" href="#/home" aria-label="Página inicial"><span>&lt;/&gt;</span> Izaac</a>
-      <nav class="nav-links" aria-label="seções">
-        <a class="nav-link" href="#/home">Início</a>
-        <a class="nav-link" href="#/sobre">Sobre</a>
-        <a class="nav-link" href="#/projetos">Projetos</a>
-        <a class="nav-link" href="#/blog">Blog</a>
-        <a class="nav-link" href="#/contato">Contato</a>
+  <div class="wrap" role="document">
+    <header>
+      <div class="brand">
+        <div class="logo">IZ</div>
+        <div class="title">
+          <h1>Izaac — Desenvolvimento Web & Mobile</h1>
+          <p>Portfólio minimalista — interfaces responsivas, APIs e experiência mobile</p>
+        </div>
+      </div>
+      <nav class="meta" aria-label="contatos">
+        <span class="kbd">email@exemplo.com</span>
       </nav>
-      <div class="actions">
-        <button class="btn sm ghost" id="themeBtn" aria-pressed="false" aria-label="Alterar tema">Tema</button>
-        <a class="btn sm primary" href="#/contato">Contratar</a>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="container" id="app" tabindex="-1">
-    <!-- Início -->
-    <section class="view active" id="view-home" data-route="/home" aria-labelledby="home-title">
-      <div class="hero">
-        <div>
-          <h1 id="home-title">Crio experiências digitais elegantes e eficientes</h1>
-          <p class="lead">Portfólio monocromático, totalmente responsivo, com interações, animações suaves e foco em performance.</p>
-          <div class="flex gap-12 mt-16">
-            <a class="btn primary" href="#/projetos">Ver projetos</a>
-            <a class="btn ghost" href="#/sobre">Conheça-me</a>
+    <main>
+      <section>
+        <div class="hero" aria-labelledby="intro">
+          <h2 id="intro">Olá — eu crio aplicações web e mobile</h2>
+          <p>Design minimalista, código testável e APIs bem documentadas. Aqui você encontra exemplos de projetos, protótipos e estudos de caso com foco em conversão e usabilidade.</p>
+
+          <!-- Carousel de projetos -->
+          <div class="carousel" aria-roledescription="carousel">
+            <div class="slides" id="slides">
+              <article class="slide" data-index="0">
+                <h3>App de Finanças Pessoais (PWA)</h3>
+                <p>Progressive Web App com sincronização offline, integração com API REST e autenticação JWT. Implementa arquitetura limpa e testes automatizados.</p>
+                <div class="meta">Stack: React, PWA, IndexedDB, Node.js, PostgreSQL</div>
+              </article>
+              <article class="slide" data-index="1">
+                <h3>Dashboard Analítico (SaaS)</h3>
+                <p>Dashboard com gráficos interativos, filtros dinâmicos e exportação CSV/PDF. Foco em performance e acessibilidade.</p>
+                <div class="meta">Stack: Next.js, Recharts, TypeScript, Docker, CI/CD</div>
+              </article>
+              <article class="slide" data-index="2">
+                <h3>e-Commerce Mobile First</h3>
+                <p>Loja com checkout otimizado, integração com gateways de pagamento e PWA para conversão em dispositivos móveis.</p>
+                <div class="meta">Stack: React Native / Expo, Stripe, GraphQL</div>
+              </article>
+            </div>
+
+            <div class="controls" aria-hidden="false">
+              <button class="ctrl" id="prev">◀</button>
+              <button class="ctrl" id="next">▶</button>
+            </div>
           </div>
-          <div class="stat-row mt-24" aria-label="métricas">
-            <div class="stat"><div class="kpi">+30</div><div>Projetos</div></div>
-            <div class="stat"><div class="kpi">5 anos</div><div>Experiência</div></div>
-            <div class="stat"><div class="kpi">~95</div><div>Lighthouse</div></div>
-          </div>
-        </div>
-        <div class="panel">
-          <div class="panel-body">
-            <div class="carousel" id="home-carousel" aria-roledescription="carrossel" aria-label="Destaques">
-              <button class="arrow left" aria-label="Anterior" data-dir="-1">◀</button>
-              <button class="arrow right" aria-label="Próximo" data-dir="1">▶</button>
-              <div class="carousel-track">
-                <div class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">Landing Page</div>
-                <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">Dashboard</div>
-                <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">E-commerce</div>
+
+          <!-- Projetos em grid -->
+          <div class="projects" aria-label="projetos principais">
+            <div class="card">
+              <div>
+                <h4>API de Chatbot Nutricional</h4>
+                <p class="meta">API REST com endpoints para perfis, histórico e recomendações. Análise de dados para TCC.</p>
               </div>
-              <div class="controls" role="tablist" aria-label="Indicadores">
-                <button class="dot" aria-label="Ir para slide 1" aria-selected="true"></button>
-                <button class="dot" aria-label="Ir para slide 2"></button>
-                <button class="dot" aria-label="Ir para slide 3"></button>
+              <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span></div>
+            </div>
+
+            <div class="card">
+              <div>
+                <h4>Sistema de Montagem de PCs (Loja)</h4>
+                <p class="meta">Configuração dinâmica de builds, cálculo de preços e geração de orçamento exportável.</p>
               </div>
+              <div class="tags"><span class="tag">React</span><span class="tag">Firebase</span></div>
+            </div>
+
+            <div class="card">
+              <div>
+                <h4>Ficha de RPG Dinâmica (t20f)</h4>
+                <p class="meta">Formulário responsivo que preenche PDF editável com dados do usuário (single-file).</p>
+              </div>
+              <div class="tags"><span class="tag">Vanilla JS</span><span class="tag">PDF</span></div>
+            </div>
+
+            <div class="card">
+              <div>
+                <h4>Plataforma de Cursos (MVP)</h4>
+                <p class="meta">Módulos, leituras, progresso do aluno e painel do instrutor com relatórios.</p>
+              </div>
+              <div class="tags"><span class="tag">Next.js</span><span class="tag">Postgres</span></div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Sobre -->
-    <section class="view" id="view-sobre" data-route="/sobre" aria-labelledby="sobre-title">
-      <h2 id="sobre-title">Sobre</h2>
-      <p class="mt-16" style="color: var(--text-dim)">Sou desenvolvedor focado em entregar interfaces rápidas, acessíveis e com design minimalista. Trabalho com HTML, CSS, JavaScript e frameworks modernos, com atenção a UX e boas práticas.</p>
-
-      <div class="tabs mt-24" role="tablist" aria-label="competências">
-        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="skills">Habilidades</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="process">Processo</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="stack">Stack</button>
-      </div>
-      <div id="tab-content" class="mt-16">
-        <div data-pane="skills">
-          <div class="grid">
-            <div class="card col-4"><div class="cover">UI/UX</div><div class="body"><span class="badge">Acessibilidade</span><h3>Design de interface</h3><p style="color:var(--text-dim)">Protótipos, hierarquia visual e microinterações.</p></div></div>
-            <div class="card col-4"><div class="cover">Front-end</div><div class="body"><span class="badge">Performance</span><h3>Aplicações web</h3><p style="color:var(--text-dim)">SPAs, roteamento, testes e otimizações.</p></div></div>
-            <div class="card col-4"><div class="cover">Branding</div><div class="body"><span class="badge">Coerência</span><h3>Identidade visual</h3><p style="color:var(--text-dim)">Sistemas monocromáticos e tipografia.</p></div></div>
-          </div>
-        </div>
-        <div data-pane="process" hidden>
-          <div class="accordion mt-8">
-            <div class="acc-item open">
-              <div class="acc-head">Descoberta <span>+</span></div>
-              <div class="acc-body">Entrevistas rápidas para entender objetivos, público e restrições.</div>
+          <!-- Scroller horizontal com cards menores -->
+          <h3 style="margin-top:18px;margin-bottom:8px">Pequenos protótipos</h3>
+          <div class="scroller" role="list" tabindex="0" aria-label="protótipos rápidos">
+            <div class="small" role="listitem">
+              <h4>Micro CMS</h4>
+              <p class="meta">Headless CMS leve para blogs corporativos.</p>
             </div>
-            <div class="acc-item">
-              <div class="acc-head">Prototipação <span>+</span></div>
-              <div class="acc-body">Fluxos e wireframes, depois hi-fi com atenção a acessibilidade.</div>
+            <div class="small" role="listitem">
+              <h4>Chat em tempo real</h4>
+              <p class="meta">WebSocket, presença e notificações push.</p>
             </div>
-            <div class="acc-item">
-              <div class="acc-head">Entrega <span>+</span></div>
-              <div class="acc-body">Código limpo, versionamento e documentação de handoff.</div>
+            <div class="small" role="listitem">
+              <h4>Ferramenta de QA</h4>
+              <p class="meta">Testes end-to-end integrados com CI.</p>
+            </div>
+            <div class="small" role="listitem">
+              <h4>Conversor CSV -> JSON</h4>
+              <p class="meta">Importação, validação e preview.</p>
             </div>
           </div>
+
         </div>
-        <div data-pane="stack" hidden>
-          <ul>
-            <li>HTML, CSS (Grid/Flex), JavaScript</li>
-            <li>SPA com roteamento por hash</li>
-            <li>Boas práticas de acessibilidade (WAI-ARIA)</li>
-            <li>Otimização leve (lazy, observers, debounce)</li>
-          </ul>
+
+        <footer>
+          <p>Observação: este template é um arquivo único (HTML/CSS/JS). Substitua textos e links pelos seus projetos reais.</p>
+        </footer>
+      </section>
+
+      <aside class="sidebar" aria-labelledby="contato">
+        <h3 id="contato">Sobre mim</h3>
+        <p class="meta">Desenvolvedor com foco em interfaces responsivas, integração backend e soluções mobile-first. Disponível para freelances e vagas full‑time.</p>
+
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+          <a class="btn" href="#" id="download-cv">Baixar CV</a>
+          <a class="btn" href="#" id="ver-cases">Ver estudos de caso</a>
         </div>
-      </div>
-    </section>
 
-    <!-- Projetos -->
-    <section class="view" id="view-projetos" data-route="/projetos" aria-labelledby="proj-title">
-      <h2 id="proj-title">Projetos</h2>
-      <p class="mt-8" style="color: var(--text-dim)">Alguns destaques recentes. Clique para ver detalhes.</p>
-      <div class="grid mt-16" id="projects-grid" aria-live="polite"></div>
-    </section>
+        <h3 style="margin-top:18px">Competências</h3>
+        <ul style="margin:8px 0 0 18px;color:var(--muted)">
+          <li>HTML, CSS, JavaScript (Vanilla / React)</li>
+          <li>APIs REST, GraphQL</li>
+          <li>Mobile (React Native / PWA)</li>
+          <li>Banco de dados & DevOps básicos</li>
+        </ul>
 
-    <!-- Blog -->
-    <section class="view" id="view-blog" data-route="/blog" aria-labelledby="blog-title">
-      <h2 id="blog-title">Blog</h2>
-      <div class="grid mt-16" id="blog-grid"></div>
-    </section>
-
-    <!-- Contato -->
-    <section class="view" id="view-contato" data-route="/contato" aria-labelledby="contato-title">
-      <h2 id="contato-title">Contato</h2>
-      <form class="panel mt-16" id="contactForm" novalidate>
-        <div class="panel-body">
-          <div class="grid">
-            <div class="col-6">
-              <label for="nome">Nome</label>
-              <input id="nome" name="nome" type="text" required placeholder="Seu nome" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:var(--text)">
-            </div>
-            <div class="col-6">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required placeholder="voce@exemplo.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:var(--text)">
-            </div>
-            <div class="col-12">
-              <label for="mensagem">Mensagem</label>
-              <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Como posso ajudar?" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:var(--text)"></textarea>
-            </div>
-            <div class="col-12">
-              <button type="submit" class="btn primary">Enviar</button>
-              <span id="formStatus" style="margin-left:12px;color:var(--text-dim)"></span>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
-
-    <!-- Modal Projeto -->
-    <dialog id="projectModal" style="border:none;border-radius:16px;max-width:720px;width:95%;background:linear-gradient(180deg,hsl(var(--hue),12%,16%),hsl(var(--hue),10%,10%));color:var(--text);box-shadow:var(--shadow)">
-      <form method="dialog" style="margin:0;padding:0">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08)">
-          <strong id="modalTitle">Projeto</strong>
-          <button class="btn sm ghost" value="close" aria-label="Fechar">Fechar</button>
-        </div>
-        <div style="padding:16px">
-          <div id="modalBody" style="color:var(--text-dim)">Detalhes do projeto.</div>
-        </div>
-      </form>
-    </dialog>
-
-    <div class="toast" id="toast" role="status" aria-live="polite">Ação concluída</div>
-  </main>
-
-  <footer>
-    <div class="container" style="display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap">
-      <div>&copy; <span id="year"></span> Izaac. Todos os direitos reservados.</div>
-      <div class="flex gap-12">
-        <a class="badge" href="#/home">Início</a>
-        <a class="badge" href="#/sobre">Sobre</a>
-        <a class="badge" href="#/projetos">Projetos</a>
-        <a class="badge" href="#/blog">Blog</a>
-        <a class="badge" href="#/contato">Contato</a>
-      </div>
-    </div>
-  </footer>
+        <h3 style="margin-top:12px">Contato</h3>
+        <p class="meta">email@exemplo.com<br>São Paulo, Brasil</p>
+      </aside>
+    </main>
+  </div>
 
   <script>
-    // Utilidades simples
-    const qs = (sel, el=document) => el.querySelector(sel);
-    const qsa = (sel, el=document) => [...el.querySelectorAll(sel)];
-
-    // Roteamento por hash
-    const routes = ["/home","/sobre","/projetos","/blog","/contato"];
-    function setActiveRoute(path){
-      routes.forEach(r => {
-        const view = qs(`#view-${r.replace('/','')}`);
-        if(!view) return;
-        view.classList.toggle('active', r === path);
-      });
-      qsa('.nav-link').forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${path}`));
-      // Foco no main para acessibilidade
-      qs('#app').focus();
-    }
-    function handleHash(){
-      const path = location.hash.replace('#','') || '/home';
-      if(!routes.includes(path)) return location.hash = '#/home';
-      history.replaceState({}, '', `#${path}`);
-      setActiveRoute(path);
-    }
-    window.addEventListener('hashchange', handleHash);
-
-    // Carousel
-    function initCarousel(root){
-      const track = qs('.carousel-track', root);
-      const slides = qsa('.slide', root);
-      const dots = qsa('.dot', root);
-      const prev = qs('.arrow.left', root);
-      const next = qs('.arrow.right', root);
-      let idx = 0, timer;
-      function go(i){
-        idx = (i + slides.length) % slides.length;
-        track.style.transform = `translateX(${-idx * 100}%)`;
-        dots.forEach((d,di)=>d.classList.toggle('active', di===idx));
+    /* Carousel básico - acessível e touch-friendly */
+    (function(){
+      const slides = document.getElementById('slides');
+      const total = slides.children.length;
+      let idx = 0;
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      function show(i){
+        idx = (i + total) % total;
+        slides.style.transform = `translateX(-${idx * 100}%)`;
       }
-      function play(){ timer = setInterval(()=>go(idx+1), 5000); }
-      function pause(){ clearInterval(timer); }
-      dots.forEach((d,di)=>d.addEventListener('click', ()=>go(di)));
-      prev.addEventListener('click', ()=>go(idx-1));
-      next.addEventListener('click', ()=>go(idx+1));
-      root.addEventListener('mouseenter', pause);
-      root.addEventListener('mouseleave', play);
-      go(0); play();
-      // Swipe
-      let startX=0; let dragging=false;
-      root.addEventListener('pointerdown', e=>{ dragging=true; startX=e.clientX; pause(); });
-      root.addEventListener('pointerup', e=>{ if(!dragging) return; dragging=false; const dx=e.clientX-startX; if(Math.abs(dx)>40) go(idx + (dx<0?1:-1)); play(); });
-    }
-
-    // Tabs
-    function initTabs(){
-      const tabs = qsa('.tab-btn');
-      const panes = qsa('#tab-content [data-pane]');
-      function show(name){
-        tabs.forEach(t=>{ const on=t.dataset.tab===name; t.classList.toggle('active', on); t.setAttribute('aria-selected', on); });
-        panes.forEach(p=>{ const on=p.dataset.pane===name; p.hidden=!on; });
-      }
-      tabs.forEach(t=> t.addEventListener('click', ()=>show(t.dataset.tab)));
-      show('skills');
-    }
-
-    // Accordion
-    function initAccordion(){
-      qsa('.acc-item').forEach(it=>{
-        qs('.acc-head', it).addEventListener('click', ()=> it.classList.toggle('open'));
+      prev.addEventListener('click',()=>show(idx-1));
+      next.addEventListener('click',()=>show(idx+1));
+      // keyboard
+      document.addEventListener('keydown',(e)=>{
+        if(e.key==='ArrowLeft') show(idx-1);
+        if(e.key==='ArrowRight') show(idx+1);
       });
-    }
-
-    // Theme toggle (monocromático, apenas alterna contraste)
-    function initTheme(){
-      const btn = qs('#themeBtn');
-      let mode = 'dark';
-      function apply(){
-        document.body.style.background = mode==='dark'
-          ? 'radial-gradient(1200px 800px at 70% -10%, hsl(var(--hue), 20%, 14%), var(--bg))'
-          : 'linear-gradient(180deg, hsl(var(--hue), 30%, 96%), hsl(var(--hue), 20%, 92%))';
-        document.documentElement.style.setProperty('--text', mode==='dark'?'hsl(var(--hue), 20%, 92%)':'hsl(var(--hue), 10%, 12%)');
-        document.documentElement.style.setProperty('--text-dim', mode==='dark'?'hsl(var(--hue), 10%, 70%)':'hsl(var(--hue), 0%, 35%)');
-        document.documentElement.style.setProperty('--surface', mode==='dark'?'hsl(var(--hue), 10%, 12%)':'hsl(var(--hue), 30%, 98%)');
-        document.documentElement.style.setProperty('--muted', mode==='dark'?'hsl(var(--hue), 8%, 26%)':'hsl(var(--hue), 10%, 88%)');
-      }
-      btn.addEventListener('click', ()=>{ mode = (mode==='dark'?'light':'dark'); btn.setAttribute('aria-pressed', String(mode==='light')); apply(); toast(`Tema: ${mode}`); });
-      apply();
-    }
-
-    // Toast
-    function toast(msg){
-      const t = qs('#toast');
-      t.textContent = msg; t.classList.add('show');
-      setTimeout(()=> t.classList.remove('show'), 2200);
-    }
-
-    // Dados de exemplo
-    const projects = [
-      { id:1, title:'E-commerce Minimal', tag:'Front-end', desc:'SPA performática com checkout simplificado.', kpi:'Core Web Vitals A' },
-      { id:2, title:'Dashboard Financeiro', tag:'UI/UX', desc:'Visualização de métricas com acessibilidade.', kpi:'+12% engajamento' },
-      { id:3, title:'Landing SaaS', tag:'Branding', desc:'Conversão otimizada e testes A/B.', kpi:'+35% conversão' },
-      { id:4, title:'Blog Estático', tag:'Conteúdo', desc:'Publicação rápida com Markdown.', kpi:'SEO 98' },
-      { id:5, title:'App Portfólio', tag:'Front-end', desc:'PWA com cache inteligente.', kpi:'Offline Ready' },
-      { id:6, title:'Painel Admin', tag:'UI/UX', desc:'Controles avançados e tabelas.', kpi:'Dark/Light' },
-    ];
-
-    const posts = [
-      { id:1, title:'Design monocromático: guia prático', snippet:'Como usar uma paleta de um único tom sem cair na monotonia.', date:'2025-08-10' },
-      { id:2, title:'Acessibilidade que converte', snippet:'Pequenas melhorias que aumentam retenção.', date:'2025-07-02' },
-      { id:3, title:'Performance web moderna', snippet:'Truques simples para atingir 90+ no Lighthouse.', date:'2025-06-12' },
-    ];
-
-    function renderProjects(){
-      const grid = qs('#projects-grid');
-      grid.innerHTML = '';
-      projects.forEach(p=>{
-        const card = document.createElement('article');
-        card.className = 'card col-4';
-        card.innerHTML = `
-          <div class="cover">${p.title}</div>
-          <div class="body">
-            <div class="flex gap-8" style="align-items:center;justify-content:space-between">
-              <span class="badge">${p.tag}</span>
-              <span style="font-size:12px;color:var(--text-dim)">${p.kpi}</span>
-            </div>
-            <h3 style="margin:8px 0 6px">${p.title}</h3>
-            <p style="color:var(--text-dim)">${p.desc}</p>
-            <div class="mt-16 flex gap-8">
-              <button class="btn sm primary" data-view="${p.id}">Ver</button>
-              <button class="btn sm ghost" data-like="${p.id}">Curtir</button>
-            </div>
-          </div>`;
-        grid.appendChild(card);
+      // swipe support
+      let startX = null;
+      slides.addEventListener('touchstart',(e)=> startX = e.changedTouches[0].clientX);
+      slides.addEventListener('touchend',(e)=>{
+        if(startX === null) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if(Math.abs(dx) > 40) show(dx>0 ? idx-1 : idx+1);
+        startX = null;
       });
-      // Eventos
-      grid.addEventListener('click', e=>{
-        const v = e.target.closest('[data-view]');
-        const l = e.target.closest('[data-like]');
-        if(v){
-          const id = Number(v.dataset.view); const pr = projects.find(x=>x.id===id);
-          openProject(pr);
-        }
-        if(l){ toast('Obrigado pelo feedback'); }
-      });
-    }
+      // auto-resize (ensure correct transform on load/resize)
+      window.addEventListener('resize',()=> show(idx));
+      show(0);
+    })();
 
-    function openProject(pr){
-      const dlg = qs('#projectModal');
-      qs('#modalTitle').textContent = pr.title;
-      qs('#modalBody').innerHTML = `<p>${pr.desc}</p><ul><li>Categoria: ${pr.tag}</li><li>Métrica: ${pr.kpi}</li></ul>`;
-      dlg.showModal();
-    }
+    // Simple handlers for buttons (to be wired to real actions)
+    document.getElementById('download-cv').addEventListener('click', (e)=>{
+      e.preventDefault();
+      alert('Substitua este botão pelo link do seu CV (PDF) ou gere dinamicamente um arquivo.');
+    });
+    document.getElementById('ver-cases').addEventListener('click',(e)=>{
+      e.preventDefault();
+      alert('Implemente âncoras para estudos de caso detalhados ou abra modais com descrições.');
+    });
 
-    function renderPosts(){
-      const grid = qs('#blog-grid');
-      grid.innerHTML = '';
-      posts.forEach(p=>{
-        const el = document.createElement('article');
-        el.className = 'card col-6';
-        el.innerHTML = `
-          <div class="cover">${new Date(p.date).toLocaleDateString('pt-BR')}</div>
-          <div class="body">
-            <h3>${p.title}</h3>
-            <p style="color:var(--text-dim)">${p.snippet}</p>
-            <div class="mt-16"><a class="btn sm ghost" href="#" data-read="${p.id}">Ler</a></div>
-          </div>`;
-        grid.appendChild(el);
-      });
-      grid.addEventListener('click', e=>{
-        const r = e.target.closest('[data-read]');
-        if(r){ e.preventDefault(); toast('Conteúdo de exemplo.'); }
-      });
-    }
-
-    // Formulário
-    function initForm(){
-      const form = qs('#contactForm');
-      const status = qs('#formStatus');
-      form.addEventListener('submit', e=>{
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
-        const ok = data.nome && /.+@.+/.test(data.email) && data.mensagem?.length>4;
-        if(!ok){ status.textContent = 'Verifique os campos obrigatórios.'; status.style.color = 'var(--warn)'; return; }
-        status.textContent = 'Enviando...';
-        setTimeout(()=>{ status.textContent = 'Enviado com sucesso.'; status.style.color = 'var(--ok)'; form.reset(); toast('Mensagem enviada'); }, 700);
-      });
-    }
-
-    // Interseção para animações suaves
-    function initReveal(){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if(en.isIntersecting){ en.target.animate([{opacity:0, transform:'translateY(8px)'},{opacity:1, transform:'none'}], {duration:350, easing:'ease-out'}); io.unobserve(en.target); }
-        });
-      }, { threshold: .12 });
-      qsa('.card, .panel, .stat').forEach(el=> io.observe(el));
-    }
-
-    // Inicialização
-    window.addEventListener('DOMContentLoaded', ()=>{
-      handleHash();
-      initCarousel(qs('#home-carousel'));
-      initTabs();
-      initAccordion();
-      initTheme();
-      renderProjects();
-      renderPosts();
-      initForm();
-      initReveal();
-      qs('#year').textContent = new Date().getFullYear();
+    // Small progressive enhancement: make scroller keyboard-friendly
+    const scroller = document.querySelector('.scroller');
+    scroller.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight') scroller.scrollBy({left:220,behavior:'smooth'});
+      if(e.key === 'ArrowLeft') scroller.scrollBy({left:-220,behavior:'smooth'});
     });
   </script>
 </body>
