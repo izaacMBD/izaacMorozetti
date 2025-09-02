@@ -5,21 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfólio – Izaac</title>
   <meta name="description" content="Portfólio monocromático, responsivo e interativo em um único arquivo HTML/JS." />
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body>
+    <header>
+        <div class="container nav" role="navigation" aria-label="principal">
+          <a class="brand" href="index.html" aria-label="Página inicial"><span>&lt;/&gt;</span> Izaac</a>
+          <nav class="nav-links" aria-label="seções">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="about.html">Sobre</a>
+            <a class="nav-link" href="projects.html">Projetos</a>
+            <a class="nav-link" href="blog.html">Blog</a>
+            <a class="nav-link" href="contact.html">Contato</a>
+          </nav>
+          <div class="actions">
+            <button class="btn ghost" id="themeBtn" aria-pressed="false" aria-label="Alterar tema">Tema</button>
+            <a class="btn primary" href="#contato">Contratar</a>
+          </div>
+        </div>
+    </header>
 
     <footer>
-        <div class="container" style="display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap">
-        <div>&copy; <span id="year"></span> Izaac. Todos os direitos reservados.</div>
-        <div class="flex gap-12">
-            <a class="badge" href="#/home">Início</a>
-            <a class="badge" href="#/sobre">Sobre</a>
-            <a class="badge" href="#/projetos">Projetos</a>
-            <a class="badge" href="#/blog">Blog</a>
-            <a class="badge" href="#/contato">Contato</a>
+        <div class="container footer-grid">
+          <div class="footer-section">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="about.html">Sobre</a></li>
+              <li><a href="projects.html">Projetos</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contact.html">Contato</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="mailto:izaac@email.com">izaac@email.com</a></li>
+              <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+              <li><a href="https://github.com" target="_blank">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Sobre mim</h4>
+            <p>Sou desenvolvedor focado em experiências digitais eficientes, interativas e acessíveis. Este portfólio é 100% monocromático e responsivo.</p>
+          </div>
         </div>
+        <div class="container footer-bottom">
+          &copy; <span id="year"></span> Izaac. Todos os direitos reservados.
         </div>
     </footer>
-  <script src="/js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
