@@ -271,24 +271,14 @@
   button { color: var(--accent); }
   a:hover { opacity: 0.85; }
 
-  /* Estilo base do texto */
+ /* Estilo base do texto */
 .laser-text {
     font-size: 3rem;
     font-weight: bold;
     position: relative;
     display: inline-block;
-    transition: color 0.2s ease;
-  }
-  
-  /* Efeito laser (glow) */
-  .laser-text::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    box-shadow: 0 0 5px rgb(255, 0, 0), 0 0 10px rgb(0, 68, 255), 0 0 20px rgb(255, 251, 0);
-    opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+    color: var(--text);
   }
   
   /* Animação de chacoalhar */
@@ -301,16 +291,15 @@
     100% { transform: translate(0, 0); }
   }
   
-  /* Aplica efeito ao hover, active ou com classe laser-active */
+  /* Efeito laser baseado no accent do tema */
   .laser-text:hover,
   .laser-text:active,
   .laser-text.laser-active {
     animation: shake 0.3s ease-in-out;
-    color: #0ff;
-  }
-  
-  .laser-text:hover::after,
-  .laser-text:active::after,
-  .laser-text.laser-active::after {
-    opacity: 1;
+    color: var(--accent);
+    text-shadow:
+      0 0 5px var(--accent),
+      0 0 10px var(--accent),
+      0 0 20px var(--accent),
+      0 0 40px var(--accent);
   }
