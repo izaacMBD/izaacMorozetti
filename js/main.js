@@ -9,11 +9,10 @@
   
     // Menu toggle for mobile
     menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', String(!expanded));
-      const hidden = siteNav.getAttribute('aria-hidden') === 'true';
-      siteNav.setAttribute('aria-hidden', String(!hidden));
-      siteNav.style.display = hidden ? 'block' : 'none';
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!expanded));
+        siteNav.setAttribute('aria-hidden', expanded ? 'true' : 'false');
+        siteNav.classList.toggle('open');
     });
   
     // Theme panel
