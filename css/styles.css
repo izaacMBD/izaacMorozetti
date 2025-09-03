@@ -178,6 +178,9 @@
   .featured h2 { margin: 0 0 1rem 0; }
   .posts-grid {
     perspective: 1000px; /* adiciona profundidade 3D */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
   }
   
   .post {
