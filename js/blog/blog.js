@@ -3,26 +3,28 @@ document.querySelectorAll('.note').forEach(note => {
   const btn = note.querySelector('.expand-btn');
 
   btn.addEventListener('click', e => {
-    e.stopPropagation(); // garante que não propague para o card inteiro
+    e.preventDefault();
+    e.stopPropagation();
+
     const grid = note.closest('.blog-grid') || note.closest('.notes-grid');
 
-    // Fecha os outros cards
+    // Se o card já está aberto, fecha ele
+    if (note.classList.contains('open')) {
+      note.classList.remove('open');
+      btn.textContent = 'Ler mais';
+      grid.classList.remove('expanding');
+      return;
+    }
+
+    // Fecha todos os outros cards
     grid.querySelectorAll('.note.open').forEach(openNote => {
-      if (openNote !== note) {
-        openNote.classList.remove('open');
-        openNote.querySelector('.expand-btn').textContent = 'Ler mais';
-      }
+      openNote.classList.remove('open');
+      openNote.querySelector('.expand-btn').textContent = 'Ler mais';
     });
 
-    // Alterna apenas o clicado
-    note.classList.toggle('open');
-    btn.textContent = note.classList.contains('open') ? 'Fechar' : 'Ler mais';
-
-    // Aplica classe de expansão no grid
-    if (grid.querySelector('.note.open')) {
-      grid.classList.add('expanding');
-    } else {
-      grid.classList.remove('expanding');
-    }
+    // Abre o clicado
+    note.classList.add('open');
+    btn.textContent = 'Fechar';
+    grid.classList.add('expanding');
   });
 });

@@ -17,7 +17,6 @@
   border-radius: 3px;
 }
 
-.notes-grid,
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -129,7 +128,6 @@
 }
 
 /* Efeito dinâmico quando uma nota expande */
-.notes-grid.expanding .note:not(.open),
 .blog-grid.expanding .note:not(.open) {
   transform: scale(0.97);
   opacity: 0.7;
