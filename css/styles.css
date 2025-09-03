@@ -161,14 +161,14 @@ button:active, a:active { transform: translateY(0); }
   .menu-toggle { display: block; }
   .site-nav {
     display: block;
-    transform-origin: top;
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
+    transform: scaleY(1) !important; /* mantém aberto ao clicar */
+    transition: max-height 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
     background: var(--bg);
-    margin-top: 0.5rem;
     border-radius: 8px;
   }
-  .site-nav.open { transform: scaleY(1); }
+  .site-nav.open { max-height: 500px; } /* altura suficiente para menu */
   .site-nav ul { flex-direction: column; gap: 0.75rem; padding: 0.5rem 1rem; }
 }
 
