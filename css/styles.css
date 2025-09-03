@@ -177,12 +177,12 @@
   .featured { padding: 0 1rem 2rem; }
   .featured h2 { margin: 0 0 1rem 0; }
   .posts-grid {
-    perspective: 1000px; /* adiciona profundidade 3D */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
+    perspective: 1000px; /* mantém o 3D sem alterar layout */
   }
-  
+
   .post {
     background: var(--card);
     padding: 0.75rem;
@@ -190,14 +190,17 @@
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    /* efeito */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     transform-style: preserve-3d;
     will-change: transform;
   }
-  
+
   .post:hover {
     box-shadow: 0 12px 25px rgba(0,0,0,0.15);
   }
+
   .post img {
     width: 84px;
     height: 64px;
