@@ -1,0 +1,72 @@
+/* Notas */
+.notes { margin: 2rem 0; }
+.notes h2 { margin-bottom: 1rem; }
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.note {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.note:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.note img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.note-content {
+  padding: 1rem;
+}
+
+.note h3 {
+  margin: 0 0 .5rem;
+  font-size: 1.1rem;
+}
+
+.note-desc {
+  color: var(--muted);
+  font-size: .95rem;
+  margin: 0 0 .75rem;
+}
+
+.expand-btn {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: .3rem .6rem;
+  border-radius: 6px;
+  font-size: .85rem;
+  cursor: pointer;
+}
+
+.expand-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.note-extra {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  color: var(--text);
+  font-size: .95rem;
+  margin-top: .75rem;
+}
+
+.note.open .note-extra {
+  max-height: 300px; /* suficiente p/ expandir */
+}
