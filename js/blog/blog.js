@@ -1,30 +1,28 @@
-// Expansão das notas com reação dinâmica
 document.querySelectorAll('.note').forEach(note => {
   const btn = note.querySelector('.expand-btn');
 
   btn.addEventListener('click', e => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.stopPropagation(); // evita que o clique no botão afete o card
 
-    const grid = note.closest('.blog-grid') || note.closest('.notes-grid');
+    const grid = note.closest('.blog-grid, .notes-grid');
 
-    // Se o card já está aberto, fecha ele
-    if (note.classList.contains('open')) {
-      note.classList.remove('open');
-      btn.textContent = 'Ler mais';
-      grid.classList.remove('expanding');
-      return;
-    }
-
-    // Fecha todos os outros cards
+    // Fecha todos os outros cards dentro do mesmo grid
     grid.querySelectorAll('.note.open').forEach(openNote => {
-      openNote.classList.remove('open');
-      openNote.querySelector('.expand-btn').textContent = 'Ler mais';
+      if (openNote !== note) {
+        openNote.classList.remove('open');
+        openNote.querySelector('.expand-btn').textContent = 'Ler mais';
+      }
     });
 
-    // Abre o clicado
-    note.classList.add('open');
-    btn.textContent = 'Fechar';
-    grid.classList.add('expanding');
+    // Alterna apenas o card clicado
+    note.classList.toggle('open');
+    btn.textContent = note.classList.contains('open') ? 'Fechar' : 'Ler mais';
+
+    // Marca grid como "expansão" apenas se houver algum aberto
+    if (grid.querySelector('.note.open')) {
+      grid.classList.add('expanding');
+    } else {
+      grid.classList.remove('expanding');
+    }
   });
 });
