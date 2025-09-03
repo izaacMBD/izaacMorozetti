@@ -181,6 +181,7 @@
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
   }
+  /* CSS para base dos cards */
   .post {
     background: var(--card);
     padding: 0.75rem;
@@ -188,7 +189,11 @@
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transform-style: preserve-3d;
+    cursor: pointer;
   }
+
   .post img {
     width: 84px;
     height: 64px;
@@ -197,6 +202,11 @@
     background: #ddd;
     flex-shrink: 0;
   }
+
+  .post:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  }
+
   .post h3 {
     margin: 0;
     font-size: 1rem;
