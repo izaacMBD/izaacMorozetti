@@ -25,3 +25,23 @@ document.querySelectorAll('.note').forEach(note => {
     }
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".expand-btn");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const note = btn.closest(".note");
+      const grid = note.closest(".notes-grid, .blog-grid");
+
+      // Fecha todos os outros no mesmo grid
+      grid.querySelectorAll(".note.open").forEach(openNote => {
+        if (openNote !== note) {
+          openNote.classList.remove("open");
+        }
+      });
+
+      // Alterna apenas o card clicado
+      note.classList.toggle("open");
+    });
+  });
+});
