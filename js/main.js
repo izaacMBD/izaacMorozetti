@@ -1,3 +1,4 @@
+// Simple interactivity: menu toggle + theme picker
 (function(){
     const menuToggle = document.getElementById('menuToggle');
     const siteNav = document.getElementById('siteNav');
@@ -6,15 +7,15 @@
     const themeList = document.getElementById('themeList');
     const closeTheme = document.getElementById('closeTheme');
   
-    // Menu toggle
+    // Menu toggle for mobile
     menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', String(!expanded));
-      siteNav.setAttribute('aria-hidden', expanded ? 'true' : 'false');
-      siteNav.classList.toggle('open');
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!expanded));
+        siteNav.setAttribute('aria-hidden', expanded ? 'true' : 'false');
+        siteNav.classList.toggle('open');
     });
   
-    // Theme panel toggle
+    // Theme panel
     themeBtn.addEventListener('click', () => {
       const hidden = themePanel.getAttribute('aria-hidden') === 'true';
       themePanel.setAttribute('aria-hidden', String(!hidden));
@@ -28,22 +29,23 @@
       themeBtn.setAttribute('aria-expanded', 'false');
     });
   
-    // Apply theme
+    // Apply theme buttons
     themeList.addEventListener('click', (e) => {
       const btn = e.target.closest('button[data-theme]');
       if (!btn) return;
       const theme = btn.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', theme);
+      document.body.className = theme;
+      // persist
       try { localStorage.setItem('mxb_theme', theme); } catch(e){}
     });
   
-    // Load persisted theme
+    // load persisted theme
     try {
       const saved = localStorage.getItem('mxb_theme');
-      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      if (saved) document.body.className = saved;
     } catch(e){}
   
-    // Close panels on outside click
+    // close panels on outside click
     document.addEventListener('click', (e) => {
       if (!themePanel.contains(e.target) && !themeBtn.contains(e.target)) {
         themePanel.setAttribute('aria-hidden','true');
@@ -52,20 +54,27 @@
       }
     });
   
-    // Card 3D hover
-    document.querySelectorAll('.post').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * 6;
-        const rotateY = ((x - centerX) / centerX) * 6;
-        card.style.transform = `scale(1.05) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
-      });
-    });
   })();
+  window.addEventListener('scroll', () => {
+    const texto = document.getElementById('texto');
+    texto.classList.add('laser-active');
+    setTimeout(() => texto.classList.remove('laser-active'), 300);
+});
+document.querySelectorAll('.post').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+  
+      const rotateX = ((y - centerY) / centerY) * 8;
+      const rotateY = ((x - centerX) / centerX) * 8;
+  
+      card.style.transform = `scale(1.08) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+  
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = "scale(1) rotateX(0) rotateY(0)";
+    });
+});
